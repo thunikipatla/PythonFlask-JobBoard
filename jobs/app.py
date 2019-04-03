@@ -13,7 +13,7 @@ def open_connection():
 	if connection == None:
 		connection = g._connection = sqlite3.connect(PATH)
 	connection.row_factory = sqlite3.Row
-	return connection 
+	return connection
 
 def execute_sql(sql, values=(), commit=False, single=False):
 	connection = open_connection()
@@ -36,7 +36,5 @@ def close_connection(exception):
 @app.route('/jobs')
 
 def jobs():
-	jobs = execute_sql('SELECT job.id, job.title, job.description, job.salary, employer.id as employer.id, employer.name as employer.name FROM job JOIN employer ON emplyer.id =job.employer_id')
+	jobs = execute_sql('SELECT job.id, job.title, job.description, job.salary, employer.id as employer_id, employer.name as employer_name FROM job JOIN employer ON emplyer.id =job.employer_id')
 	return render_template('index.html', jobs=jobs)
-
-
